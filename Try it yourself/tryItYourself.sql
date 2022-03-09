@@ -127,4 +127,17 @@ FROM date_time_types;
 --varchar(25) and varchar(50) are appropiate data types for names
 --It is a good idea for finding specifc entries easier
 
+--Chapter 4 try it yourself
+
+--copy imaginary 
+--from 'C:\Users\Brent\OneDrive\Programming\SQL-Module\Try it yourself\imaginary.txt'
+--with (format csv, header, delimeter '|');
+
+--Yeah I think they will work because the precision is set to 3 and there is only 3 decimal places
+
+
+
+--Chapter 5 try it yourself
+
+
 
