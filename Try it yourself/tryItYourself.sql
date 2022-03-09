@@ -139,5 +139,16 @@ FROM date_time_types;
 
 --Chapter 5 try it yourself
 
+select (22/7)*5^2
+
+select geo_name, state_us_abbreviation, p0010005
+from us_counties_2010
+order by p0010005 desc
+limit 1;
+
+--Maricopa County, Maricopa County was named after the Maricopa Native Americans.
+--Five Native American Reservations are located in the county.
+--The largest are the Salt River Pima-Maricopa Indian Community (east of Scottsdale) and the Gila River Indian Community (south of Chandler).
+
 
 

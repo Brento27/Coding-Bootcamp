@@ -431,7 +431,11 @@ copy (
 	limit 20)	
 to 'C:\Users\Brent\OneDrive\Programming\SQL-Module\Analysis\us_counties_top_20_housing.txt' WITH (FORMAT CSV, HEADER, DELIMITER '|');
 
-
+--Chapter 5 try it yourself
+select geo_name, state_us_abbreviation, p0010005
+from us_counties_2010
+order by p0010005 desc
+limit 1;
 
 
 --------------------------------------------------------------
@@ -632,6 +636,8 @@ ON c2010.state_fips = c2000.state_fips
 ORDER BY pct_change DESC;
 
 create database Chapter_6
+
+
 
 
 
