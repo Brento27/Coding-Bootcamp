@@ -387,16 +387,215 @@ LEFT JOIN profession AS e ON d.prof_id = e.prof_id;
 
 --ODBC and JDBC Support Chapter 12
 
-SELECT * FROM status CROSS JOIN intrests
+SELECT * FROM status CROSS JOIN intrests;
 
 --ODBC and JDBC Support Chapter 13
 
-SELECT * FROM status NATURAL JOIN intrests
+SELECT * FROM status NATURAL JOIN intrests;
 
 --ODBC and JDBC Support Chapter 14
 
 SELECT * FROM status
 UNION ALL
 SELECT * FROM intrests
-ORDER BY 
+ORDER BY status ASC;
+
+--ODBC and JDBC Support Chapter 15
+
+SELECT contact_id, prof_id
+INTO engineer_contacts
+from my_contacts
+Where prof_id = 1;
+
+--ODBC and JDBC Support Chapter 16
+
+SELECT AVG (prof_id) FROM my_contacts;
+SELECT random() * 100 + 1 AS RAND_1_100;
+
+--ODBC and JDBC Support Chapter 17
+
+SELECT contact_id, prof_id
+FROM my_contacts 
+WHERE prof_id > (SELECT AVG (prof_id) FROM my_contacts);
+
+--ODBC and JDBC Support Chapter 18
+
+SELECT relname, relpages FROM pg_class 
+ORDER BY relpages DESC limit 1;
+
+--ODBC and JDBC Support Chapter 19
+
+SELECT DISTINCT ON
+contact_id, prof_id
+FROM my_contacts 
+WHERE prof_id > (SELECT AVG (prof_id) FROM my_contacts);
+
+--Object-Oriented SQL for Data Complexity 1
+
+CREATE TABLE sales (
+    brand VARCHAR NOT NULL,
+    segment VARCHAR NOT NULL,
+    quantity INT NOT NULL,
+    PRIMARY KEY (brand, segment)
+);
+
+INSERT INTO sales (brand, segment, quantity)
+VALUES
+    ('ABC', 'Premium', 100),
+    ('ABC', 'Basic', 200),
+    ('XYZ', 'Premium', 100),
+    ('XYZ', 'Basic', 300);
+
+SELECT
+    brand,
+    segment,
+    SUM (quantity)
+FROM
+    sales
+GROUP BY
+    ROLLUP (brand, segment)
+ORDER BY
+    brand,
+    segment;
+
+--Object-Oriented SQL for Data Complexity 2
+
+SELECT
+    brand,
+    segment,
+    SUM (quantity)
+FROM
+    sales
+GROUP BY
+    CUBE (brand, segment)
+ORDER BY
+    brand,
+    segment;
+
+--Object-Oriented SQL for Data Complexity 3
+
+CREATE INDEX index_contacts ON my_contacts (first_name);
+
+--Object-Oriented SQL for Data Complexity 4
+
+
+
+
+
+
+
+
+
+--PRESENTATION
+
+--ODBC and JDBC Support Chapter 8 Inner Join
+ 
+SELECT s1.first_name, s2.first_name, s1.prof_id
+FROM my_contacts s1
+INNER JOIN my_contacts s2 ON s1.contact_id <> s2.contact_id
+AND s1.prof_id = s2.prof_id;
+
+SELECT s1.first_name, s2.first_name, s1.prof_id
+FROM my_contacts s1
+INNER JOIN my_contacts s2 on s1.contact_id <> s2.contact_id
+AND s1.prof_id = s2.prof_id
+
+
+
+
+
+--ODBC and JDBC Support Chapter 9 Full outer join join
+
+SELECT e.first_name, e.last_name, d.profession
+FROM my_contacts e
+FULL OUTER JOIN profession d ON d.prof_id = e.prof_id;
+--Docter null Value
+
+SELECT e.first_name, e.last_name, d.profession
+FROM my_contacts e
+FULL OUTER JOIN profession d ON d.prof_id = e.prof_id
+
+--ODBC and JDBC Support Chapter 12 Cross Join
+
+SELECT * FROM status CROSS JOIN intrests;
+
+SELECT * FROM status CROSS JOIN intrests;
+
+--ODBC and JDBC Support Chapter 17 subqueries
+
+SELECT contact_id, prof_id
+FROM my_contacts 
+WHERE prof_id > (SELECT AVG (prof_id) FROM my_contacts);
+
+--Object-Oriented SQL for Data Complexity 8
+
+--DENSE RANK wil ALLocate second place if there is more than 1 first place where Rank wil allocate third place
+
+SELECT first_name, last_name, prof_id, status_id,
+DENSE_RANK () OVER (
+PARTITION BY prof_id
+ORDER BY status_id)
+FROM my_contacts
+
+--Object-Oriented SQL for Data Complexity 12
+CREATE ROLE Brent
+LOGIN
+PASSWORD 'myPass1';
+
+--Object-Oriented SQL for Data Complexity 13
+
+CREATE ROLE emp;
+GRANT emp TO Brent;
+
+
+
+
+
+
+
+
+
+SELECT * FROM my_contacts;
+SELECT * FROM status;
+SELECT first_name, prof_id FROM my_contacts;  --Showing All the collumns in my_contacts table
+
+------Presentation----------
+--Chapter 8
+--WE are selecting all the people with the same jobs
+SELECT s1.first_name, s2.first_name, s1.prof_id 
+FROM my_contacts s1
+INNER JOIN my_contacts s2 On s1.contact_id <> s2.contact_id
+AND s1.prof_id = s2.prof_id;
+
+--Chapter 9
+--We are demonstrating full outer join to show which jobs different people have
+SELECT e.first_name, e.last_name, d.profession
+FROM my_contacts e
+FULL OUTER JOIN profession d On d.prof_id = e.prof_id;
+
+--Chapter 12
+--SHowing different possibilties between two tables (data)
+--SHOWING which people with a certain status and what intrests they can have
+SELECT * FROM status CROSS JOIN intrests
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
