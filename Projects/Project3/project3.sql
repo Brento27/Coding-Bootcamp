@@ -478,82 +478,36 @@ CREATE INDEX index_contacts ON my_contacts (first_name);
 
 --Object-Oriented SQL for Data Complexity 4
 
-
-
-
-
-
-
-
-
---PRESENTATION
-
---ODBC and JDBC Support Chapter 8 Inner Join
- 
-SELECT s1.first_name, s2.first_name, s1.prof_id
-FROM my_contacts s1
-INNER JOIN my_contacts s2 ON s1.contact_id <> s2.contact_id
-AND s1.prof_id = s2.prof_id;
-
-SELECT s1.first_name, s2.first_name, s1.prof_id
-FROM my_contacts s1
-INNER JOIN my_contacts s2 on s1.contact_id <> s2.contact_id
-AND s1.prof_id = s2.prof_id
-
-
-
-
-
---ODBC and JDBC Support Chapter 9 Full outer join join
-
-SELECT e.first_name, e.last_name, d.profession
-FROM my_contacts e
-FULL OUTER JOIN profession d ON d.prof_id = e.prof_id;
---Docter null Value
-
-SELECT e.first_name, e.last_name, d.profession
-FROM my_contacts e
-FULL OUTER JOIN profession d ON d.prof_id = e.prof_id
-
---ODBC and JDBC Support Chapter 12 Cross Join
-
-SELECT * FROM status CROSS JOIN intrests;
-
-SELECT * FROM status CROSS JOIN intrests;
-
---ODBC and JDBC Support Chapter 17 subqueries
-
-SELECT contact_id, prof_id
-FROM my_contacts 
-WHERE prof_id > (SELECT AVG (prof_id) FROM my_contacts);
-
---Object-Oriented SQL for Data Complexity 8
-
---DENSE RANK wil ALLocate second place if there is more than 1 first place where Rank wil allocate third place
-
-SELECT first_name, last_name, prof_id, status_id,
-DENSE_RANK () OVER (
-PARTITION BY prof_id
-ORDER BY status_id)
+Select prof_id, count(prof_id)
 FROM my_contacts
+Group by prof_id
+having count(*)>5;
 
---Object-Oriented SQL for Data Complexity 12
-CREATE ROLE Brent
-LOGIN
-PASSWORD 'myPass1';
+--Object-Oriented SQL for Data Complexity 5
 
---Object-Oriented SQL for Data Complexity 13
+CREATE OR REPLACE FUNCTION new_profession()
+RETURNS trigger AS
+$$
+BEGIN
+INSERT INTO profession (profession)
+Values ('new');
+Return New;
+END
+$$
+LANGUAGE 'plpgsql';
 
-CREATE ROLE emp;
-GRANT emp TO Brent;
+CREATE TRIGGER new_profession_trigger
+before INSERT
+ON my_contacts
+FOR EACH ROW
+EXECUTE PROCEDURE new_profession();
 
+DROP TRIGGER new_profession_trigger On my_contacts
 
+INSERT INTO my_contacts (last_name,first_name,phone,email,gender,birthday,prof_id,zip_code,status_id)
+VALUES ('Alendy','Dragter','025-505-5549','congue.elite@protonmail.com','Female','Feb 1, 2009',11,7103,3);
 
-
-
-
-
-
+SELECT * FROM profession
 
 SELECT * FROM my_contacts;
 SELECT * FROM status;
