@@ -478,36 +478,67 @@ CREATE INDEX index_contacts ON my_contacts (first_name);
 
 --Object-Oriented SQL for Data Complexity 4
 
-Select prof_id, count(prof_id)
+SELECT prof_id, count(prof_id)
 FROM my_contacts
-Group by prof_id
-having count(*)>5;
+GROUP BY prof_id
+HAVING count(*)>5;
 
---Object-Oriented SQL for Data Complexity 5
+--Object-Oriented SQL for Data Complexity 7
 
-CREATE OR REPLACE FUNCTION new_profession()
-RETURNS trigger AS
-$$
-BEGIN
-INSERT INTO profession (profession)
-Values ('new');
-Return New;
-END
-$$
-LANGUAGE 'plpgsql';
+SELECT first_name, last_name, prof_id, status_id,
+RANK () OVER (
+PARTITION BY prof_id
+ORDER BY status_id)
+FROM my_contacts
 
-CREATE TRIGGER new_profession_trigger
-before INSERT
-ON my_contacts
-FOR EACH ROW
-EXECUTE PROCEDURE new_profession();
+--Object-Oriented SQL for Data Complexity 8
 
-DROP TRIGGER new_profession_trigger On my_contacts
+SELECT first_name, last_name, prof_id, status_id,
+DENSE_RANK () OVER (
+PARTITION BY prof_id
+ORDER BY status_id)
+FROM my_contacts
 
-INSERT INTO my_contacts (last_name,first_name,phone,email,gender,birthday,prof_id,zip_code,status_id)
-VALUES ('Alendy','Dragter','025-505-5549','congue.elite@protonmail.com','Female','Feb 1, 2009',11,7103,3);
+--Object-Oriented SQL for Data Complexity 9
 
-SELECT * FROM profession
+SELECT first_name, prof_id, zip_code,
+FIRST_VALUE(first_name) OVER (
+PARTITION BY zip_code
+ORDER BY first_name )
+AS low_first_name
+FROM my_contacts
+
+--Object-Oriented SQL for Data Complexity 10
+
+SELECT first_name, prof_id, zip_code,
+Last_VALUE(first_name) OVER (
+PARTITION BY zip_code
+ORDER BY first_name )
+AS high_first_name
+FROM my_contacts
+
+--Object-Oriented SQL for Data Complexity 11
+
+EXPLAIN SELECT * FROM my_contacts;
+
+--Object-Oriented SQL for Data Complexity 12
+
+CREATE ROLE Brent
+LOGIN
+PASSWORD 'myPass1';
+
+--Object-Oriented SQL for Data Complexity 13
+
+CREATE ROLE emp;
+GRANT emp TO Brent;
+
+
+
+
+
+
+
+
 
 SELECT * FROM my_contacts;
 SELECT * FROM status;
@@ -532,24 +563,29 @@ FULL OUTER JOIN profession d On d.prof_id = e.prof_id;
 --SHOWING which people with a certain status and what intrests they can have
 SELECT * FROM status CROSS JOIN intrests
 
+--ODBC and JDBC Support Chapter 17 subqueries
+--Extracting certain data within a querie to get more summarised data
+SELECT contact_id, prof_id
+FROM my_contacts 
+WHERE prof_id > (SELECT AVG (prof_id) FROM my_contacts);
 
+--Object-Oriented SQL for Data Complexity 8
 
+--DENSE RANK wil ALLocate second place if there is more than 1 first place where Rank wil allocate third place
 
+SELECT first_name, last_name, prof_id, status_id,
+DENSE_RANK () OVER (
+PARTITION BY prof_id
+ORDER BY status_id)
+FROM my_contacts
 
+--Object-Oriented SQL for Data Complexity 12
+--Creating new users
+CREATE ROLE Brent
+LOGIN
+PASSWORD 'myPass1';
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+--Object-Oriented SQL for Data Complexity 13
+--Creating new user groups
+CREATE ROLE emp;
+GRANT emp TO Brent;
