@@ -1,0 +1,2 @@
+Change in operator to the of operator Chapter 7 dictionaries
+for (const key for object.keys(this.datastore)) {}
