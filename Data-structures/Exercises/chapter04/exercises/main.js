@@ -8,7 +8,7 @@ function Stack() {
     this.peek = peek;
     this.check = check;
     this.length = length;
-    this.empty = empty;
+    //this.empty = empty;
 }
 
 function push(element) {
@@ -29,10 +29,6 @@ function length() {
 
 function clear() {
     this.top = 0;
-}
-
-function length() {
-    return this.top;
 }
 
 s = new Stack
