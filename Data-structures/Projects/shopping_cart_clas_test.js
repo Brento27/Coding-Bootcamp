@@ -126,7 +126,7 @@ checkout.addEventListener("click", add_order)
 var items_in_cart = document.getElementById("items_in_cart")
 items_in_cart.addEventListener("click", check_cart)
 
-// 8. function to store order
+// 8. display all orders
 
 function add_order() {
     var cart_order = {};
