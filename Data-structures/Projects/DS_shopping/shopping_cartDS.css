@@ -6,13 +6,17 @@ table {
 
 td,
 th {
-    border: 1px solid #dddddd;
+    border: 1px solid #f5f7a8;
     text-align: left;
     padding: 8px;
 }
 
 tr:nth-child(even) {
-    background-color: #dddddd;
+    background-color: #f5f7a8;
+}
+
+tr:nth-child(odd) {
+    background-color: #f5b056;
 }
 
 #checkout {
