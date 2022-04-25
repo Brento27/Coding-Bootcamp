@@ -95,13 +95,13 @@ stock.push(stock_item_1, stock_item_2, stock_item_3, stock_item_4, stock_item_5,
 
 function display_all() {
 
-    var myTable = "<table><th style='width: 100px; color: #853100; text-align: right;'>Code</th>";
-    myTable += "<th style='width: 100px; color: #853100; text-align: right;'>Item</th>";
-    myTable += "<th style='width: 100px; color: #853100; text-align: right;'>Price</th>";
-    myTable += "<th style='width: 100px; color: #853100; text-align: right;'>Quantity</th>";
-    myTable += "<th style='width: 100px; color: #853100; text-align: right;'>Total</th>";
-    myTable += "<th style='width: 100px; color: #853100; text-align: right;'>Add</th>";
-    myTable += "<th style='width: 100px; color: #853100; text-align: right;'>Remove</th>";
+    var myTable = "<table><th style='width: 100px; color: #853100; text-align: right; border-color: #853100'>Code</th>";
+    myTable += "<th style='width: 100px; color: #853100; text-align: right; border-color: #853100'>Item</th>";
+    myTable += "<th style='width: 100px; color: #853100; text-align: right; border-color: #853100'>Price</th>";
+    myTable += "<th style='width: 100px; color: #853100; text-align: right; border-color: #853100'>Quantity</th>";
+    myTable += "<th style='width: 100px; color: #853100; text-align: right; border-color: #853100'>Total</th>";
+    myTable += "<th style='width: 100px; color: #853100; text-align: right; border-color: #853100'>Add</th>";
+    myTable += "<th style='width: 100px; color: #853100; text-align: right; border-color: #853100'>Remove</th>";
 
     for (i = 0; i < stock.length; i++) {//Adding rows to my menu
 
@@ -114,13 +114,13 @@ function display_all() {
         else {
             quantity = cart[index].quantity
         }
-        myTable += "<tr><td style='width: 100px; text-align: right; color : #e63b10'><b>" + stock[i].stock_id + "</b></td>";
-        myTable += "<td style='width: 100px; text-align: right; color : #e63b10'><b>" + stock[i].stock_name + "</b></td>";
-        myTable += "<td style='width: 100px; text-align: right; color : #e63b10'><b>R" + stock[i].price + "</b></td>";
-        myTable += "<td style='width: 100px; text-align: right; color : #e63b10'><b>" + quantity + "</b></td>";
-        myTable += "<td style='width: 100px; text-align: right; color : #e63b10'><b>R" + quantity * stock[i].price + "</b></td>";
-        myTable += "<td><button onclick='add_selection(" + i + ")' style= 'color : #853100; background-color : #ffcc7a; border-color : #964d3b'><b>Add</b></button></td>";
-        myTable += "<td><button onclick='remove_selection(" + i + ")' style= 'color : #853100; background-color : #ffcc7a; border-color : #964d3b'><b>Remove</b></button></td>";
+        myTable += "<tr><td style='width: 100px; text-align: right; color : #e63b10; border-color: #853100'><b>" + stock[i].stock_id + "</b></td>";
+        myTable += "<td style='width: 100px; text-align: right; color : #e63b10; border-color: #853100'><b>" + stock[i].stock_name + "</b></td>";
+        myTable += "<td style='width: 100px; text-align: right; color : #e63b10; border-color: #853100'><b>R" + stock[i].price + "</b></td>";
+        myTable += "<td style='width: 100px; text-align: right; color : #e63b10; border-color: #853100'><b>" + quantity + "</b></td>";
+        myTable += "<td style='width: 100px; text-align: right; color : #e63b10; border-color: #853100'><b>R" + quantity * stock[i].price + "</b></td>";
+        myTable += "<td style='border-color: #853100'><button onclick='add_selection(" + i + ")' style= 'color : #853100; background-color : #ffcc7a; border-color : #964d3b'><b>Add</b></button></td>";
+        myTable += "<td style='border-color: #853100'><button onclick='remove_selection(" + i + ")' style= 'color : #853100; background-color : #ffcc7a; border-color : #964d3b'><b>Remove</b></button></td>";
     }
 
     myTable += "</table>";
@@ -220,6 +220,7 @@ function add_order() {
         cart = []; //resetiing cart
         display_all();
     }else{
+        check_cart();
         document.getElementById("order").innerHTML = "You can't checkout because the cart is empty!!";
     }
 }
