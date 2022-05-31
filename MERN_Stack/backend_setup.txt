@@ -1,0 +1,5 @@
+1. Create backend folder
+2. Open terminal in backend
+3. run 'npm init -y'
+4. run 'npm install express cors mongodb dotenv'
+5. run 'npm install -g nodemon'
